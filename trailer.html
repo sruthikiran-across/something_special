@@ -4,14 +4,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Something Special</title>
 <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 </head>
 <body class="darkTrailer">
 
 <div id="timer" class="timerCorner timerWhite"></div>
 
 <div id="intro">
-  <h1>Something special</h1>
-  <h2>is waiting for you...</h2>
+  <h1 style="font-family:'Dancing Script',cursive;font-size:48px;margin-bottom:10px;">💕 Something special</h1>
+  <h2 style="font-family:'Playfair Display',serif;font-style:italic;font-weight:300;">is waiting for you...</h2>
 </div>
 
 <div id="heartContainer" class="hidden">
@@ -24,7 +25,7 @@
 
 let timer = document.getElementById("timer");
 let target = new Date();
-target.setHours(19, 0, 0);
+target.setHours(19, 15, 0);
 
 function updateTimer() {
   let now = new Date();
@@ -51,12 +52,10 @@ setTimeout(() => {
   timer.classList.add("timerBlack");
   vid.play();
 
-  // Go to gift page instantly when video ends
   vid.addEventListener("ended", () => {
     window.location.href = "gift.html";
   });
 
-  // Fallback: go after 10 seconds if video doesn't fire ended
   setTimeout(() => {
     window.location.href = "gift.html";
   }, 10000);
