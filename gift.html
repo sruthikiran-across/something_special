@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Gift For You</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="darkTrailer">
+
+<div id="timer" class="timerCorner timerWhite"></div>
+
+<canvas id="confetti"></canvas>
+
+<div id="giftScene">
+  <div class="giftBox" onclick="openGift()">🎁</div>
+  <p class="tapText">Tap the gift</p>
+</div>
+
+<script>
+
+let timer = document.getElementById("timer");
+let target = new Date();
+target.setHours(19, 0, 0);
+
+function updateTimer() {
+  let now = new Date();
+  let diff = target - now;
+  if (diff <= 0) { timer.innerHTML = "00:00:00"; return; }
+  let h = Math.floor(diff / 3600000);
+  let m = Math.floor((diff % 3600000) / 60000);
+  let s = Math.floor((diff % 60000) / 1000);
+  timer.innerHTML = String(h).padStart(2,'0') + ":" + String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+let canvas = document.getElementById("confetti");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let ctx = canvas.getContext("2d");
+
+let pieces = [];
+let colors = ["#ff4d6d","#ffc2d1","#ff85a1","#ffffff","#ffb347","#a8edea","#fed6e3","#ffe4e1"];
+
+for (let i = 0; i < 200; i++) {
+  pieces.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height - canvas.height,
+    w: Math.random() * 12 + 5,
+    h: Math.random() * 7 + 4,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    speed: Math.random() * 3 + 1.5,
+    angle: Math.random() * 360,
+    spin: (Math.random() - 0.5) * 5
+  });
+}
+
+function drawConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  pieces.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x + p.w / 2, p.y + p.h / 2);
+    ctx.rotate(p.angle * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    ctx.restore();
+    p.y += p.speed;
+    p.angle += p.spin;
+    if (p.y > canvas.height) {
+      p.y = -p.h;
+      p.x = Math.random() * canvas.width;
+    }
+  });
+  requestAnimationFrame(drawConfetti);
+}
+drawConfetti();
+
+function openGift() {
+  window.location.href = "photowall.html";
+}
+
+</script>
+</body>
+</html>

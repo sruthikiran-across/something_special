@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ===== INDEX PAGE ===== */
+.pink {
+  background: linear-gradient(135deg, #ff4d6d, #ffc2d1);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#bouquet { width: 60vw; max-width: 300px; }
+#rose { width: 55vw; max-width: 240px; }
+
+.hint { color: white; }
+
+.hidden { display: none; }
+
+/* ===== TRAILER + GIFT PAGE ===== */
+.darkTrailer {
+  background: black;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+#intro {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+.fadeAway { animation: fade 3s forwards; }
+@keyframes fade { to { opacity: 0; } }
+
+#heartContainer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+}
+
+#heartVideo {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* ===== TIMER ===== */
+.timerCorner {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: monospace;
+  z-index: 9999;
+}
+.timerWhite { color: white; }
+.timerBlack { color: black; }
+
+/* ===== CONFETTI ===== */
+#confetti {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== GIFT SCENE ===== */
+#giftScene {
+  position: relative;
+  z-index: 10;
+}
+
+.giftBox {
+  font-size: 80px;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  display: block;
+}
+
+@keyframes bounce { 50% { transform: translateY(-15px); } }
+
+.tapText {
+  margin-top: 10px;
+  color: white;
+}
+
+/* ===== PHOTOWALL ===== */
+.wall {
+  background: black;
+  color: white;
+  overflow: hidden;
+}
+
+#message {
+  margin: 20px;
+  font-size: 24px;
+  color: white;
+}
+
+.row { display: flex; }
+
+.row img {
+  height: 120px;
+  margin: 6px;
+  border-radius: 10px;
+}
+
+.continue {
+  margin-top: 40vh;
+  color: white;
+}

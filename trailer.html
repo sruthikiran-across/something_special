@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Something Special</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="darkTrailer">
+
+<div id="timer" class="timerCorner timerWhite"></div>
+
+<div id="intro">
+  <h1>Something special</h1>
+  <h2>is waiting for you...</h2>
+</div>
+
+<div id="heartContainer" class="hidden">
+  <video id="heartVideo" muted playsinline>
+    <source src="photos/background.mp4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+
+let timer = document.getElementById("timer");
+let target = new Date();
+target.setHours(19, 0, 0);
+
+function updateTimer() {
+  let now = new Date();
+  let diff = target - now;
+  if (diff <= 0) { timer.innerHTML = "00:00:00"; return; }
+  let h = Math.floor(diff / 3600000);
+  let m = Math.floor((diff % 3600000) / 60000);
+  let s = Math.floor((diff % 60000) / 1000);
+  timer.innerHTML = String(h).padStart(2,'0') + ":" + String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+setTimeout(() => {
+  document.getElementById("intro").classList.add("fadeAway");
+}, 4000);
+
+setTimeout(() => {
+  let heartContainer = document.getElementById("heartContainer");
+  let vid = document.getElementById("heartVideo");
+
+  heartContainer.classList.remove("hidden");
+  timer.classList.remove("timerWhite");
+  timer.classList.add("timerBlack");
+  vid.play();
+
+  // Go to gift page instantly when video ends
+  vid.addEventListener("ended", () => {
+    window.location.href = "gift.html";
+  });
+
+  // Fallback: go after 10 seconds if video doesn't fire ended
+  setTimeout(() => {
+    window.location.href = "gift.html";
+  }, 10000);
+
+}, 7000);
+
+</script>
+</body>
+</html>

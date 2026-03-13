@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memories ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="wall">
+
+<div id="timer" class="timerCorner timerWhite"></div>
+<div id="message"></div>
+<div id="photoWall"></div>
+
+<script>
+
+let timer = document.getElementById("timer");
+let target = new Date();
+target.setHours(19, 0, 0);
+
+function updateTimer() {
+  let now = new Date();
+  let diff = target - now;
+  if (diff <= 0) { timer.innerHTML = "00:00:00"; return; }
+  let h = Math.floor(diff / 3600000);
+  let m = Math.floor((diff % 3600000) / 60000);
+  let s = Math.floor((diff % 60000) / 1000);
+  timer.innerHTML = String(h).padStart(2,'0') + ":" + String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+let wall = document.getElementById("photoWall");
+let photos = [];
+for (let i = 1; i <= 15; i++) {
+  photos.push("photos/photo" + i + ".jpeg");
+}
+for (let r = 0; r < 6; r++) {
+  let row = document.createElement("div");
+  row.className = "row";
+  photos.concat(photos).forEach(p => {
+    let img = document.createElement("img");
+    img.src = p;
+    row.appendChild(img);
+  });
+  wall.appendChild(row);
+}
+
+let text = "Some memories deserve to last forever...";
+let i = 0;
+function type() {
+  if (i < text.length) {
+    document.getElementById("message").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 80);
+  }
+}
+type();
+
+setTimeout(() => {
+  document.body.innerHTML = "<h1 class='continue'>To be continued...</h1>";
+}, 6000);
+
+</script>
+</body>
+</html>
