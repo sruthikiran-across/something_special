@@ -128,4 +128,26 @@ body {
 .continue {
   margin-top: 40vh;
   color: white;
+
+}
+/* text screen */
+#textScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+#message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 28px;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  max-width: 90vw;
 }
