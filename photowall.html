@@ -8,14 +8,14 @@
 <body class="wall">
 
 <div id="timer" class="timerCorner timerWhite"></div>
-<div id="message"></div>
+<div id="message" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999;font-size:28px;font-family:'Georgia',serif;color:white;white-space:nowrap;"></div>
 <div id="photoWall"></div>
 
 <script>
 
 let timer = document.getElementById("timer");
 let target = new Date();
-target.setHours(19, 0, 0);
+target.setHours(19, 15, 0);
 
 function updateTimer() {
   let now = new Date();
@@ -62,4 +62,5 @@ setTimeout(() => {
 
 </script>
 </body>
+
 </html>
