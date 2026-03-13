@@ -4,12 +4,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Memories ❤️</title>
 <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 </head>
 <body class="wall">
 
 <div id="timer" class="timerCorner timerWhite"></div>
-<div id="message" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999;font-size:28px;font-family:'Georgia',serif;color:white;white-space:nowrap;"></div>
-<div id="photoWall"></div>
+
+<div id="textScreen">
+  <div id="message"></div>
+</div>
+
+<div id="photoWall" class="hidden"></div>
 
 <script>
 
@@ -29,22 +34,7 @@ function updateTimer() {
 setInterval(updateTimer, 1000);
 updateTimer();
 
-let wall = document.getElementById("photoWall");
-let photos = [];
-for (let i = 1; i <= 15; i++) {
-  photos.push("photos/photo" + i + ".jpeg");
-}
-for (let r = 0; r < 6; r++) {
-  let row = document.createElement("div");
-  row.className = "row";
-  photos.concat(photos).forEach(p => {
-    let img = document.createElement("img");
-    img.src = p;
-    row.appendChild(img);
-  });
-  wall.appendChild(row);
-}
-
+/* TYPING TEXT */
 let text = "Some memories deserve to last forever...";
 let i = 0;
 function type() {
@@ -56,11 +46,36 @@ function type() {
 }
 type();
 
+/* AFTER TEXT — show photo wall */
+setTimeout(() => {
+  document.getElementById("textScreen").style.display = "none";
+  document.getElementById("photoWall").classList.remove("hidden");
+  buildWall();
+}, 5000);
+
+function buildWall() {
+  let wall = document.getElementById("photoWall");
+  let photos = [];
+  for (let i = 1; i <= 15; i++) {
+    photos.push("photos/photo" + i + ".jpeg");
+  }
+  for (let r = 0; r < 6; r++) {
+    let row = document.createElement("div");
+    row.className = "row";
+    photos.concat(photos).forEach(p => {
+      let img = document.createElement("img");
+      img.src = p;
+      row.appendChild(img);
+    });
+    wall.appendChild(row);
+  }
+}
+
+/* END SCREEN */
 setTimeout(() => {
   document.body.innerHTML = "<h1 class='continue'>To be continued...</h1>";
-}, 6000);
+}, 11000);
 
 </script>
 </body>
-
 </html>
